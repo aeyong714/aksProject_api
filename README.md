@@ -27,3 +27,44 @@
 ## 데이터베이스 설정
 - MySQL
 - SQLAlchemy
+
+<br>
+
+## Docker 이미지 빌드 및 푸시
+1. Docker 이미지 빌드
+```sh
+docker build -t <dockerhub-username>/my-flask-api:latest .
+```
+2. Docker Hub에 로그인
+```sh
+docker login
+```
+3. Docker 이미지 푸시
+```sh
+docker push <dockerhub-username>/my-flask-api:latest
+````
+
+<br>
+
+## Dockerfile
+프로젝트 루트 디렉토리에 Dockerfile을 생성하고 아래 내용을 추가합니다:
+
+```dockerfile
+FROM python:3.9-slim
+
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+
+CMD ["python", "app.py"]
+```
+<br>
+
+## Kubernetes 배포
+Docker Hub에 푸시된 이미지를 사용하여 Kubernetes 클러스터에 배포합니다.
+
+해당 내용은 다음 레포지토리를 참고해주세요 !  
+[aksProject_infra 링크](https://github.com/aeyong714/aksProject_infra)
+
+<br>
